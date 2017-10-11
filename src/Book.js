@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Book extends Component {
     render() {
-        const { updateBook, book } = this.props;
+        const { updateBook, book } = this.props
         return (
             <li>
                 <div className="book">

@@ -13,7 +13,6 @@ class App extends Component {
 
   _fetchAll() {
     BooksAPI.getAll().then((books) => {
-      console.log(`BOOKS`, books)
       this.setState({ books: books })
     })
   }
@@ -24,25 +23,26 @@ class App extends Component {
 
   _updateBook = (book, shelf) => {
     const { books } = this.state;
-    const updatedBooks = books.map(bookState => {
+    let cloneState = books;
+    
+    if(book.shelf === undefined) {
+      book.shelf = shelf;
+      cloneState.push(book);
+    }
+    
+    const updatedBooks = cloneState.map(bookState => {
       if (bookState.id === book.id) {
         bookState.shelf = shelf
       }
       return bookState
     })
-    
+
     BooksAPI.update(book, shelf)
     this.setState({ books: updatedBooks })
   }
 
-  _searchBook = (query, maxResults) => {
-    BooksAPI.search(query, maxResults).then((result) => {
-      this.setState({ books: result })
-    })
-  }
-
   render() {
-    const { books } = this.state;
+    const { books } = this.state
 
     return (
       <div className="app">
@@ -50,14 +50,7 @@ class App extends Component {
           <MyReads books={ books } updateBook={ this._updateBook }  />
         )}/>
         <Route exact path="/search" render={({ history }) => (
-          <SearchMyReads 
-            books={ books } 
-            searchBook={ this._searchBook } 
-            updateBook={ this._updateBook }
-            updateBook={(book, shelf) => {
-              this._updateBook(book, shelf)
-              history.push('/')
-            }} />
+          <SearchMyReads updateBook={ this._updateBook } />
         )}/>
       </div>
     )

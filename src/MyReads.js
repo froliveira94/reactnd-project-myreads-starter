@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import { ReadShelf, WantToReadShelf, CurrentlyShelf } from './Shelf';
+import { Link } from 'react-router-dom'
+import { ReadShelf, WantToReadShelf, CurrentlyShelf } from './Shelf'
 
 class MyReads extends Component {
 
   render() {
     const { books, updateBook } = this.props;
-    const readBooks = books.filter(book => book.shelf === 'read');
-    const wantToReadBooks = books.filter(book => book.shelf === 'wantToRead');
-    const currentlyReadingBooks = books.filter(book => book.shelf === 'currentlyReading');
+    const readBooks = books.filter(book => book.shelf === 'read')
+    const wantToReadBooks = books.filter(book => book.shelf === 'wantToRead')
+    const currentlyReadingBooks = books.filter(book => book.shelf === 'currentlyReading')
 
     return (
       <div>
