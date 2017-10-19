@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { ReadShelf, WantToReadShelf, CurrentlyShelf } from './Shelf'
+import Shelf from './Shelf'
 
 class MyReads extends Component {
 
@@ -18,9 +18,9 @@ class MyReads extends Component {
             </div>
             <div className="list-books-content">
               <div>
-                <CurrentlyShelf books={ currentlyReadingBooks } updateBook={ updateBook } />
-                <WantToReadShelf books={ wantToReadBooks } updateBook={ updateBook } />
-                <ReadShelf books={ readBooks } updateBook={ updateBook } />
+                <Shelf title="Currently Reading" books={currentlyReadingBooks} updateBook={ updateBook } />
+                <Shelf title="Want to Read" books={wantToReadBooks} updateBook={ updateBook } />
+                <Shelf title="Read" books={readBooks} updateBook={ updateBook } />
               </div>
             </div>
             <div className="open-search">

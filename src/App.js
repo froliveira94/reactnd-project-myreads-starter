@@ -7,8 +7,11 @@ import './App.css'
 
 class App extends Component {
 
-  state = {
-    books: [],
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    }
   }
 
   _fetchAll() {
@@ -37,8 +40,9 @@ class App extends Component {
       return bookState
     })
 
-    BooksAPI.update(book, shelf)
-    this.setState({ books: updatedBooks })
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState({ books: updatedBooks })
+    })
   }
 
   render() {
@@ -50,7 +54,7 @@ class App extends Component {
           <MyReads books={ books } updateBook={ this._updateBook }  />
         )}/>
         <Route exact path="/search" render={({ history }) => (
-          <SearchMyReads updateBook={ this._updateBook } />
+          <SearchMyReads books={ books } updateBook={ this._updateBook } />
         )}/>
       </div>
     )

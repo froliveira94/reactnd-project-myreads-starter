@@ -18,21 +18,4 @@ class Shelf extends Component {
     }
 }
 
-
-export class ReadShelf extends Shelf {
-    static defaultProps = {
-        title: 'Read'
-    }
-}
-
-export class WantToReadShelf extends Shelf {
-    static defaultProps = {
-        title: 'Want to Read'
-    }
-}
-
-export class CurrentlyShelf extends Shelf {
-    static defaultProps = {
-        title: 'Currently Reading'
-    }
-}
+export default Shelf

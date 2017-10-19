@@ -5,14 +5,32 @@ import Book from './Book'
 
 class SearchMyReads extends Component {
 
-    state = {
-        query: '',
-        booksResearched: []
+    constructor(props) {
+        super(props);
+
+        this._updateQuery = this._updateQuery.bind(this);
+        this._searchBook = this._searchBook.bind(this);
+
+        this.state = {
+            query: '',
+            booksResearched: []
+        }
     }
 
     _searchBook = (query, maxResults) => {
+        const { books } = this.props;
+
+        console.log(`MINE `, books)
+        
         BooksAPI.search(query, maxResults).then((result) => {
-            this.setState({ booksResearched: result })
+            console.log(`RESPONSE `, result)
+            const searched = result.map(book => {
+                const filtered = books.filter(currentBook => currentBook.id === book.id)[0];
+
+                return filtered ? filtered : book;
+            })
+            console.log(`FILTERED `, searched)
+            this.setState({ booksResearched: searched })
         })
     }
 
@@ -23,17 +41,19 @@ class SearchMyReads extends Component {
 
     render() {
         const { query, booksResearched } = this.state;
-        const { updateBook } = this.props;
+        const { updateBook, books } = this.props;
 
         return(
             <div className="search-books">
                 <div className="search-books-bar">
                     <Link to="/" className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
-                        <input type="text" 
-                        placeholder="Search by title or author"
-                        value={ query }
-                        onChange={(event) => this._updateQuery(event.target.value)} />
+                        {/* <Throttle time="200" handler="onChange"> */}
+                            <input type="text" 
+                                placeholder="Search by title or author"
+                                value={ query }
+                                onChange={(e) => this._updateQuery(e.target.value) } />
+                        {/* </Throttle> */}
                     </div>
                 </div>
                 <div className="search-books-results">
