@@ -48,12 +48,10 @@ class SearchMyReads extends Component {
                 <div className="search-books-bar">
                     <Link to="/" className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
-                        {/* <Throttle time="200" handler="onChange"> */}
-                            <input type="text" 
-                                placeholder="Search by title or author"
-                                value={ query }
-                                onChange={(e) => this._updateQuery(e.target.value) } />
-                        {/* </Throttle> */}
+                        <input type="text" 
+                            placeholder="Search by title or author"
+                            value={ query }
+                            onChange={(e) => this._updateQuery(e.target.value) } />
                     </div>
                 </div>
                 <div className="search-books-results">
